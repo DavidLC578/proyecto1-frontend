@@ -8,6 +8,7 @@ import { Home } from "./pages/Home";
 
 // Protected
 import { Protected } from "./protected/protected";
+import { Register } from "./pages/Register";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route index element={<Welcome />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route
           path="/home"
           element={
