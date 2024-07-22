@@ -9,11 +9,23 @@ export const registrar = (user, navigate, setError) => {
     .post(`${host}api/users/createUser`, user)
     .then((res) => {
       if (res.status === 201) {
+        navigate("/login");
+      }
+    })
+    .catch((err) => {
+      setError(err.response.data.message);
+    });
+};
+
+export const login = (user, navigate, setError) => {
+  axios
+    .post(`${host}api/login`, user)
+    .then((res) => {
+      if (res.status === 200) {
         navigate("/home");
       }
     })
     .catch((err) => {
       setError(err.response.data.message);
-      console.log(err.response.data.message);
     });
 };
