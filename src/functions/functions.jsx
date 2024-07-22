@@ -22,6 +22,7 @@ export const login = (user, navigate, setError) => {
     .post(`${host}api/login`, user)
     .then((res) => {
       if (res.status === 200) {
+        localStorage.setItem("token", res.data.token);
         navigate("/home");
       }
     })
