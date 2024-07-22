@@ -37,6 +37,7 @@ export function Register() {
             <Input
               value={user.password}
               onChange={(e) => setUser({ ...user, password: e.target.value })}
+              tipo="password"
             />
           </div>
           <div>
