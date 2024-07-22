@@ -12,7 +12,6 @@ export function Register() {
 
   const manejarEnvio = (e) => {
     e.preventDefault();
-    console.log("envio");
     registrar(user, navigate, setError);
   };
 
@@ -24,7 +23,7 @@ export function Register() {
           onSubmit={manejarEnvio}
         >
           <div className="text-center mb-5">
-            <h1 className="text-md">Welcome</h1>
+            <h1 className="text-md">Registro</h1>
           </div>
           <div>
             <h1>Username</h1>
