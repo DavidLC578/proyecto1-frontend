@@ -9,6 +9,7 @@ import { Home } from "./pages/Home";
 // Protected
 import { Protected } from "./protected/protected";
 import { Register } from "./pages/Register";
+import { Perfil } from "./pages/Perfil";
 
 function App() {
   return (
@@ -22,6 +23,14 @@ function App() {
           element={
             <Protected>
               <Home />
+            </Protected>
+          }
+        />
+        <Route
+          path="/perfil"
+          element={
+            <Protected>
+              <Perfil />
             </Protected>
           }
         />
