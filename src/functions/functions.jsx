@@ -30,3 +30,28 @@ export const login = (user, navigate, setError) => {
       setError(err.response.data.message);
     });
 };
+
+export const getCurrentUser = (setUser) => {
+  // Obtén el token del almacenamiento local
+  const token = localStorage.getItem('token');
+
+  // Configura los encabezados de la solicitud
+  const config = {
+    headers: {
+      authorization: `Bearer ${token}` // Usa el token en el encabezado Authorization
+    }
+  };
+
+  axios.get(`${host}api/users/profile`, config)
+    .then((res) => {
+      if (res.status === 200) {
+        setUser({
+          name: res.data.name,
+          description: res.data.description
+        })
+      }
+    })
+    .catch((err) => {
+      console.error('Error fetching user profile:', err.response ? err.response.data : err.message);
+    });
+};
