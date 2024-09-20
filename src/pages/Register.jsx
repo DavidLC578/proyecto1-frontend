@@ -16,6 +16,7 @@ export function Register() {
   };
   prueba()
   // prueba2()
+
   return (
     <>
       <section className="flex justify-center h-screen items-center ">
