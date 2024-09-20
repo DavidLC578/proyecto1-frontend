@@ -2,7 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 import { Input } from "../components/Input";
-import { registrar } from "../functions/functions";
+import {prueba, prueba2, registrar } from "../functions/functions";
 import { useState } from "react";
 
 export function Register() {
@@ -14,7 +14,8 @@ export function Register() {
     e.preventDefault();
     registrar(user, navigate, setError);
   };
-
+  prueba()
+  // prueba2()
   return (
     <>
       <section className="flex justify-center h-screen items-center ">
