@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
-const host = "http://localhost:5000/";
+const host = "https://3000-idx-back-1730838434321.cluster-blu4edcrfnajktuztkjzgyxzek.cloudworkstations.dev/"
 
 export const registrar = (user, navigate, setError) => {
   axios
@@ -11,6 +10,7 @@ export const registrar = (user, navigate, setError) => {
       if (res.status === 201) {
         navigate("/login");
       }
+      console.log(res)
     })
     .catch((err) => {
       setError(err.response.data.message);
@@ -19,7 +19,7 @@ export const registrar = (user, navigate, setError) => {
 
 export const login = (user, navigate, setError) => {
   axios
-    .post(`${host}api/login`, user)
+    .post(`${host}api/users`, user)
     .then((res) => {
       if (res.status === 200) {
         localStorage.setItem("token", res.data.token);
@@ -42,16 +42,41 @@ export const getCurrentUser = (setUser) => {
     }
   };
 
-  axios.get(`${host}api/users/profile`, config)
+  axios.get(`${host}api/users`, config)
     .then((res) => {
       if (res.status === 200) {
+        const profileImgUrl = `${host}${res.data.profileimg}`;
         setUser({
           name: res.data.name,
-          description: res.data.description
+          description: res.data.description,
+          profileimg: profileImgUrl
         })
       }
     })
     .catch((err) => {
       console.error('Error fetching user profile:', err.response ? err.response.data : err.message);
+    });
+}
+
+export const uploadProfilePic = (file) => {
+  const token = localStorage.getItem('token');
+
+  const config = {
+    headers: {
+      authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+
+  const formData = new FormData();
+  formData.append('img', file); // Añade el archivo con el nombre esperado por el backend
+
+  axios.post(`${host}api/users/uploadProfilePic`, formData, config)
+    .then((res) => {
+      window.location.reload();
+      console.log('Imagen subida:', res);
+    })
+    .catch((err) => {
+      console.error('Error al subir la imagen:', err);
     });
 };
