@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getUserById } from "../functions/functions";
+import { followUser, getUserById } from "../functions/functions";
 import { PerfilPublicaciones } from "./PerfilPublicaciones";
 
 export function UserPerfil() {
@@ -11,6 +11,10 @@ export function UserPerfil() {
         getUserById(setUser, userId);
     }, []);
 
+    const handleFollowUser = () => {
+        followUser({seguidoId: userId})
+    }
+
     return (
         <>
             <div className="pt-4 ps-3 pb-2 border border-b-1 border-b-black">
@@ -20,7 +24,8 @@ export function UserPerfil() {
                         alt="Profile picture"
                         className="w-16 h-full object-cover rounded-full"
                     />
-                    <button className="h-10 w-20 rounded-lg me-3 bg-primary text-white hover:bg-primaryHover transition-colors duration-300">Seguir</button>
+                    <button className="h-10 w-20 rounded-lg me-3 bg-primary text-white hover:bg-primaryHover transition-colors duration-300"
+                    onClick={handleFollowUser}>Seguir</button>
                 </div>
                 <div className="pt-3 space-y-k">
                     <h1>{user.name}</h1>

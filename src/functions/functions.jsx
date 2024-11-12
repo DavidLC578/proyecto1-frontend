@@ -92,3 +92,19 @@ export const getUserById = (setUser, userId) => {
       })
     })
 }
+
+export const followUser = (seguidoId) => {
+  const token = localStorage.getItem('token');
+  const config = {
+    headers: {
+      authorization: `Bearer ${token}`
+    },
+  };
+  axios.post(`${host}api/users/follow`, seguidoId, config)
+    .then((res) => {
+      console.log(res.data.message)
+    })
+    .catch((err) => {
+      console.error(err.response.data.message);
+    });
+}
