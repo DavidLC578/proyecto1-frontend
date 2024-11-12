@@ -80,3 +80,15 @@ export const uploadProfilePic = (file) => {
       console.error('Error al subir la imagen:', err);
     });
 };
+
+export const getUserById = (setUser, userId) => {
+  axios.get(`${host}api/users/${userId}`)
+    .then((res) => {
+      const profileImgUrl = `${host}${res.data.profileimg}`;
+      setUser({
+        name: res.data.name,
+        description: res.data.description,
+        profileimg: profileImgUrl
+      })
+    })
+}

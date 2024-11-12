@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getCurrentUser, uploadProfilePic } from "../functions/functions";
 import { PerfilPublicaciones } from "./PerfilPublicaciones";
 import { Upload } from '../assets/Upload';
+import { AuthContext } from "./AuthContext";
 
-export function Perfil() {
-  const [user, setUser] = useState({});
-
-  useEffect(() => {
-    getCurrentUser(setUser);
-  }, []);
-
+export function PerfilPersonal() {
+  const user = useContext(AuthContext)
   const handleSumbitProfilePic = (event) => {
     const file = event.target.files[0]; // Captura el archivo seleccionado
     if (file) {

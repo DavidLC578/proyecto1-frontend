@@ -5,11 +5,13 @@ import { Routes, Route } from "react-router-dom";
 import { Login } from "./pages/Login";
 import { Welcome } from "./pages/Welcome";
 import { Home } from "./pages/Home";
+import { UserPerfil } from "./pages/UserPerfil"
 
 // Protected
 import { Protected } from "./protected/protected";
 import { Register } from "./pages/Register";
-import { Perfil } from "./pages/Perfil";
+import { PerfilPersonal } from "./pages/PerfilPersonal";
+import { AuthProvider } from "./pages/AuthContext";
 
 function App() {
   return (
@@ -30,8 +32,17 @@ function App() {
           path="/perfil"
           element={
             <Protected>
-              <Perfil />
+              <AuthProvider>
+                <PerfilPersonal />
+              </AuthProvider>
             </Protected>
+          }
+        />
+        <Route path="/:userId"
+          element={
+            <AuthProvider>
+              <UserPerfil />
+            </AuthProvider>
           }
         />
       </Routes>
